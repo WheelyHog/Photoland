@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
 const Header = () => {
-  const { isOpen, setIsOpen } = useContext(CartContext);
+  const { isOpen, setIsOpen, itemsAmount } = useContext(CartContext);
   const [catNavMobile, setCatNavMobile] = useState(false);
   return (
     <header className="bg-primary py-6 fixed w-full top-0 z-40 lg:relative xl:mb-[30px]">
@@ -44,7 +44,7 @@ const Header = () => {
             >
               <SlBag className="text-2xl" />
               <div className="bg-accent text-primary absolute w-[18px] h-[18px] rounded-full top-3 -right-1 text-[13px] flex justify-center items-center font-bold tracking-[-0.1em]">
-                2
+                {itemsAmount}
               </div>
             </div>
             <div

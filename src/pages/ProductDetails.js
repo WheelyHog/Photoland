@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import RelatedProducts from "../components/RelatedProducts";
+import { CartContext } from "../context/CartContext";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { data } = useFetch(`/products?populate=*&filters[id][$eq]=${id}`);
+  const { addToCart } = useContext(CartContext);
+
   if (!data) {
     return <div className="container mx-auto">Loading...</div>;
   }
@@ -32,7 +35,12 @@ const ProductDetails = () => {
               <div className="text-3xl text-accent font-semibold">
                 ${data[0].attributes.price}
               </div>
-              <button className="btn btn-accent">Add to Cart</button>
+              <button
+                className="btn btn-accent"
+                onClick={() => addToCart(data, id)}
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
